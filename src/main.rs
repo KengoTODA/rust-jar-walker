@@ -19,7 +19,7 @@ fn parse(container: &str, archive: &mut zip::read::ZipArchive<File>) {
         let file = archive.by_index(i).unwrap();
         let file_name = file.name();
         if file_name.ends_with(".class") {
-            println!("{}\t{}", container, file_name);
+            println!("{}\t{}", container, file_name.replace("/", "."));
         } else if file_name.ends_with(".jar") {
             // TODO parse inside of this jar file
             println!("{}!{}", container, file_name);
