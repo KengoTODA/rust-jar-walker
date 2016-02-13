@@ -13,16 +13,16 @@ rust-jar-walker <file_name>
 }
 
 /// parse zip archive, and print content inside of it
-fn parse(archive: &mut zip::read::ZipArchive<File>) {
+fn parse(container: &str, archive: &mut zip::read::ZipArchive<File>) {
     info!("start");
     for i in 0..(archive.len()) {
         let file = archive.by_index(i).unwrap();
         let file_name = file.name();
         if file_name.ends_with(".class") {
-            println!("class: {}", file_name);
+            println!("{}\t{}", container, file_name);
         } else if file_name.ends_with(".jar") {
             // TODO parse inside of this jar file
-            println!("jar: {}", file_name);
+            println!("{}!{}", container, file_name);
         }
     }
 }
@@ -31,10 +31,10 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     match args.len() {
         2 => {
-            let file_name = std::path::Path::new(&*args[1]);
+            let file_name = std::path::Path::new(&args[1]);
             let root_file = File::open(&file_name).unwrap();
             let mut zip_archive = zip::ZipArchive::new(root_file).unwrap();
-            parse(&mut zip_archive);
+            parse(&*args[1], &mut zip_archive);
         },
         _ => {
             help();
