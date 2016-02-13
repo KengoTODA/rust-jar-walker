@@ -1,0 +1,8 @@
+[package]
+name = "rust-jar-walker"
+version = "0.1.0"
+authors = ["Kengo TODA <skypencil@gmail.com>"]
+
+[dependencies]
+log = "0.3.5"
+zip = "0.1"
