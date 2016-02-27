@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/KengoTODA/rust-jar-walker.svg?branch=master)](https://travis-ci.org/KengoTODA/rust-jar-walker)
+
 ## how to build
 
 ```
