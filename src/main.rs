@@ -77,3 +77,25 @@ fn main() {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use std;
+    use super::sanitize_file_name;
+
+    #[test]
+    fn sanitize_normal() {
+        let sanitized = sanitize_file_name("README.md");
+        let mut expected = std::path::PathBuf::new();
+        expected.push("README.md");
+        assert_eq!(expected, sanitized);
+    }
+
+    #[test]
+    fn sanitize_null() {
+        let sanitized = sanitize_file_name("README.md\0.txt");
+        let mut expected = std::path::PathBuf::new();
+        expected.push("README.md");
+        assert_eq!(expected, sanitized);
+    }
+}
